@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <form class="login">
     <h1>请登录账号</h1>
     <fieldset>
@@ -147,5 +147,92 @@ button:hover {
 
 input.invalid::placeholder {
   color: rgb(220, 0, 0);
+}
+</style> -->
+
+
+<template>
+  <a-form
+    :model="formState"
+    name="normal_login"
+    class="login-form"
+    @finish="onFinish"
+    @finishFailed="onFinishFailed"
+  >
+    <a-form-item
+      label="账号"
+      name="username"
+      :rules="[{ required: true, message: 'Please input your username!' }]"
+    >
+      <a-input v-model:value="formState.username">
+        <template #prefix>
+          <UserOutlined class="site-form-item-icon" />
+        </template>
+      </a-input>
+    </a-form-item>
+
+    <a-form-item
+      label="密码"
+      name="password"
+      :rules="[{ required: true, message: 'Please input your password!' }]"
+    >
+      <a-input-password v-model:value="formState.password">
+        <template #prefix>
+          <LockOutlined class="site-form-item-icon" />
+        </template>
+      </a-input-password>
+    </a-form-item>
+
+    <a-form-item>
+      <a-form-item name="remember" no-style>
+        <a-checkbox v-model:checked="formState.remember">记住我</a-checkbox>
+      </a-form-item>
+      <a class="login-form-forgot" href="">忘记密码</a>
+    </a-form-item>
+
+    <a-form-item>
+      <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
+        登录
+      </a-button>
+      <a href="">现在注册!</a>
+    </a-form-item>
+  </a-form>
+</template>
+<script lang="ts" setup>
+import { reactive, computed } from 'vue';
+import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
+interface FormState {
+  username: string;
+  password: string;
+  remember: boolean;
+}
+const formState = reactive<FormState>({
+  username: '',
+  password: '',
+  remember: true,
+});
+const onFinish = (values: any) => {
+  console.log('Success:', values);
+};
+
+const onFinishFailed = (errorInfo: any) => {
+  console.log('Failed:', errorInfo);
+};
+const disabled = computed(() => {
+  return !(formState.username && formState.password);
+});
+</script>
+<style scoped>
+ .login-form {
+  max-width: 400px;
+  height: 300px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+ .login-form-forgot {
+  float: right;
+}
+ .login-form-button {
+  width: 100%;
 }
 </style>
