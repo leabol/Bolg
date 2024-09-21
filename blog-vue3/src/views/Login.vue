@@ -198,6 +198,7 @@ input.invalid::placeholder {
     </a-form-item>
   </a-form>
 </template>
+
 <script lang="ts" setup>
 import { reactive, computed } from 'vue';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
