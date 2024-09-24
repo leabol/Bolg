@@ -152,13 +152,16 @@ input.invalid::placeholder {
 
 
 <template>
-  <a-form
+  <div class="login">
+    <a-form
     :model="formState"
     name="normal_login"
     class="login-form"
     @finish="onFinish"
     @finishFailed="onFinishFailed"
   >
+    <h1>请登录账号</h1>
+    <div class="form-item">
     <a-form-item
       label="账号"
       name="username"
@@ -190,13 +193,18 @@ input.invalid::placeholder {
       <a class="login-form-forgot" href="">忘记密码</a>
     </a-form-item>
 
-    <a-form-item>
-      <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
+    <a-form-item class="butt">
+      <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button" size="large">
         登录
       </a-button>
-      <a href="">现在注册!</a>
+      <div  style="margin-top: 10px">
+        <a href="">现在注册!</a>
+      </div>
     </a-form-item>
+  </div>
   </a-form>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>
@@ -223,11 +231,18 @@ const disabled = computed(() => {
   return !(formState.username && formState.password);
 });
 </script>
+
 <style scoped>
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
  .login-form {
-  max-width: 400px;
-  height: 300px;
-  padding: 10px;
+  min-width: 400px;
+  height: 420px;
+  padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
  .login-form-forgot {
@@ -235,5 +250,11 @@ const disabled = computed(() => {
 }
  .login-form-button {
   width: 100%;
+}
+.form-item{
+  margin: 30px 0;
+}
+.butt {
+  margin-top: 20px;
 }
 </style>
