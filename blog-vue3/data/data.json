@@ -2,9 +2,19 @@
   "uersData": [
     {
       "id": "1",
-      "name": "John Doe",
+      "username": "John Doe",
       "password": "123456"
+    },
+    {
+      "id": "4d96",
+      "username": "lea",
+      "password": "123"
+    },
+    {
+      "id": "6cb5",
+      "username": "123",
+      "password": "123",
+      "remember": true
     }
-
   ]
 }

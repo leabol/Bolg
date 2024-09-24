@@ -3,7 +3,8 @@
         
     <a-form class="signup-form" ref="formRef" name="custom-validation" :model="formState" :rules="rules" v-bind="layout"
         @finish="handleFinish" @validate="handleValidate" @finishFailed="handleFinishFailed">
-        <h1>注册账号</h1>
+        <h1><RouterLink to="/login">登录</RouterLink> | 
+            <RouterLink to="/signup">现在注册</RouterLink></h1>
         <a-form-item  label="用户名" >
             <a-input v-model:value="formState.username" />
         </a-form-item>
@@ -22,8 +23,9 @@
         
 
         <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-            <a-button type="primary" html-type="submit" size="large">注册账号</a-button>
+            <a-button type="primary" html-type="submit" size="large" @click="signup">注册账号</a-button>
             <a-button style="margin-left: 15px" @click="resetForm" size="large">重置表单</a-button>
+            
         </a-form-item>
     </a-form>
     </div>
@@ -89,18 +91,38 @@ const layout = {
         span: 14,
     },
 };
-const handleFinish = values => {
-    console.log(values, formState);
-};
-const handleFinishFailed = errors => {
-    console.log(errors);
-};
+
+// const handleFinish = values => {
+//     console.log(values, formState);
+// };
+// const handleFinishFailed = errors => {
+//     console.log(errors);
+// };
 const resetForm = () => {
     formRef.value.resetFields();
 };
-const handleValidate = (...args) => {
-    console.log(args);
-};
+// const handleValidate = (...args) => {
+//     console.log(args);
+// };
+//发送注册请求
+const signupMessage = {
+    username: formState.username,
+    password: formState.pass,
+    number: formState.email,
+    code: formState.Code
+}
+function signup() {
+    fetch("http://localhost:3000/uersData", {
+        method: "POST",
+        headers: { 
+            'Content-Type': "application/json" 
+        },
+        body: JSON.stringify(signupMessage)
+    })
+    .then(res => res.json())
+    .then(data => { cosole.log(data) })
+    .catch(err => { console.log(err) })
+}
 </script>
 
 
