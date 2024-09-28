@@ -25,21 +25,30 @@
                         </path>
                     </g>
                 </svg>
-                <input type="text" class="input" placeholder="请输入邮箱" />
+                <input type="text" class="input" placeholder="请输入邮箱" v-model="email" />
             </div>
-            <button class="button-submit">发送验证</button>
-            <p class="p">还没有账号? <span class="span"><RouterLink to="/signup">现在注册</RouterLink></span></p>
+            <button class="button-submit" @click="submit">发送验证</button>
+            <p class="p">还没有账号? <span class="span">
+                    <RouterLink to="/signup">现在注册</RouterLink>
+                </span></p>
         </form>
     </div>
 </template>
 
 <script setup>
-import SubmitCode from '@/components/submitCode.vue';
+import { ref } from 'vue';
+const email = ref('');
 
+function submit() {
+    fetch("http://email")
+        .then(res => res.json())
+        .then(cosole.log("发送成功"))
+        .catch(cosole.log("发送失败"))
+}
 </script>
 
 
-<style>
+<style scoped>
 /* From Uiverse.io by R1SH4BH81 */
 .form {
     display: flex;
@@ -49,6 +58,8 @@ import SubmitCode from '@/components/submitCode.vue';
     padding: 30px;
     width: 450px;
     border-radius: 20px;
+    border: 1px #4e4e4e solid;
+
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -165,6 +176,7 @@ import SubmitCode from '@/components/submitCode.vue';
 .btn:hover {
     border: 1px solid #2d79f3;
 }
+
 .title {
     display: flex;
     justify-content: space-between;
@@ -175,10 +187,10 @@ import SubmitCode from '@/components/submitCode.vue';
 }
 
 .cross-icon {
-  width: 20px;
-  height: 20px;
-  color: #555;
-  cursor: pointer;
+    width: 20px;
+    height: 20px;
+    color: #555;
+    cursor: pointer;
 }
 
 .cross-icon:hover {

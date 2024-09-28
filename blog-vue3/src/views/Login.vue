@@ -26,7 +26,7 @@
             </path>
           </g>
         </svg>
-        <input placeholder="请输入邮箱" class="input" type="text">
+        <input placeholder="请输入邮箱" class="input" type="text" v-model="formState.username">
       </div>
 
       <div class="flex-column">
@@ -41,14 +41,14 @@
             d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0">
           </path>
         </svg>
-        <input placeholder="请输入密码" class="input" type="password">
+        <input placeholder="请输入密码" class="input" type="password" v-model="formState.username">
       </div>
 
       <div class="flex-row">
         <div></div>
         <RouterLink to="/forgotPassword"><span class="span">忘记密码</span></RouterLink>
       </div>
-      <button class="button-submit">注册</button>
+      <button class="button-submit" @click="login">登 录</button>
       <p class="p">还没有账号? <span class="span"><RouterLink to="/signup">点击注册</RouterLink></span>
 
       </p>
@@ -57,8 +57,30 @@
 </template>
 
 
-<script>
-import { RouterLink } from 'vue-router';
+<script setup>
+import { RouterLink} from 'vue-router';
+import { reactive } from 'vue';
+
+
+
+const formState = reactive({
+  username: '',
+  password: '',
+});
+
+
+function login() {
+  fetch('http://localhost:3000/uersData', {
+    method: 'POST',
+    header: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formState)
+  })
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+  }
 
 
 
@@ -66,7 +88,7 @@ import { RouterLink } from 'vue-router';
 </script>
 
 
-<style>
+<style scoped>
 /* From Uiverse.io by JohnnyCSilva */
 a {
   text-decoration: none; 

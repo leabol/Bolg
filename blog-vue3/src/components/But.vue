@@ -1,68 +1,51 @@
 <template>
   <div>
 <button><slot></slot></button>
-
   </div>
 </template>
 
-<style>
+<style scoped>
 /* From Uiverse.io by e-coders */ 
 button {
-  appearance: none;
-  background-color: #fafbfc;
-  border: 1px solid rgba(27, 31, 35, 0.15);
-  border-radius: 6px;
-  box-shadow:
-    rgba(27, 31, 35, 0.04) 0 1px 0,
-    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
-  box-sizing: border-box;
-  color: #24292e;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  list-style: none;
-  padding: 6px 16px;
-  position: relative;
-  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  white-space: nowrap;
-  word-wrap: break-word;
-}
-
-button:hover {
-  background-color: #f3f4f6;
-  text-decoration: none;
-  transition-duration: 0.1s;
+ appearance: none;
+ background-color: transparent;
+ border: 0.125em solid #1A1A1A;
+ border-radius: 0.9375em;
+ box-sizing: border-box;
+ color: #3B3B3B;
+ cursor: pointer;
+ display: inline-block;
+ font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+ font-size: 16px;
+ font-weight: 600;
+ line-height: normal;
+ margin-right: 10px;
+ min-height: 2em;
+ min-width: 0;
+ outline: none;
+ padding: 0.5em 2em;
+ text-align: center;
+ text-decoration: none;
+ transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ will-change: transform;
 }
 
 button:disabled {
-  background-color: #fafbfc;
-  border-color: rgba(27, 31, 35, 0.15);
-  color: #959da5;
-  cursor: default;
+ pointer-events: none;
+}
+
+button:hover {
+ color: #fff;
+ background-color: #1A1A1A;
+ box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+ transform: translateY(-2px);
 }
 
 button:active {
-  background-color: #edeff2;
-  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
-  transition: none 0s;
+ box-shadow: none;
+ transform: translateY(0);
 }
-
-button:focus {
-  outline: 1px transparent;
-}
-
-button:before {
-  display: none;
-}
-
-button:-webkit-details-marker {
-  display: none;
-}
-
 </style>

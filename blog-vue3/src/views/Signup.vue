@@ -25,7 +25,7 @@
                         </path>
                     </g>
                 </svg>
-                <input type="text" class="input" placeholder="请输入新用户名" />
+                <input type="text" class="input" placeholder="请输入新用户名" v-model="formState.username"/>
             </div>
             <div class="flex-column">
                 <label>邮箱 </label>
@@ -38,8 +38,8 @@
                         </path>
                     </g>
                 </svg>
-                <input type="text" class="input" placeholder="请输入邮箱" />
-                <SubmitCode></SubmitCode>
+                <input type="text" class="input" placeholder="请输入邮箱" v-model="formState.email"/>
+                <SubmitCode :email="formState.email"></SubmitCode>
             </div>
             <div class="flex-column">
                 <label>验证码 </label>
@@ -67,10 +67,10 @@
                         d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0">
                     </path>
                 </svg>
-                <input type="password" class="input" placeholder="请输入密码" />
+                <input type="password" class="input" placeholder="请输入密码" v-model="formState.pass"/>
             </div>
 
-            <button class="button-submit">注册</button>
+            <button class="button-submit" @click="signup">注册</button>
             <p class="p">已经有账号? <span class="span"><RouterLink to="/login">登录账号</RouterLink></span></p>
         </form>
     </div>
@@ -78,11 +78,32 @@
 
 <script setup>
 import SubmitCode from '@/components/submitCode.vue';
+import { reactive } from 'vue';
 
+const formState = reactive({
+    username: '',
+    email: '',
+    Code: '',
+    pass: '',
+});
+
+
+function signup() {
+    fetch("http://localhost:3000/uersData", {
+        method: "POST",
+        headers: {
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify(formState)
+    })
+        .then(res => res.json())
+        .then(data => { cosole.log(data) })
+        .catch(err => { console.log(err) })
+}
 </script>
 
 
-<style>
+<style scoped>
 /* From Uiverse.io by R1SH4BH81 */
 .form {
     display: flex;
@@ -92,6 +113,7 @@ import SubmitCode from '@/components/submitCode.vue';
     padding: 30px;
     width: 450px;
     border-radius: 20px;
+  border: 1px #4e4e4e solid;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
