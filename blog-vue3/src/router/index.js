@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../views/login.vue'
 import Signup from '../views/Signup.vue'
 import ForgotPass from '@/views/ForgotPass.vue'
+import Editer from '@/components/Editer.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/forgotPassword',
       name: 'forgotPassword',
       component: ForgotPass
+    },
+    {
+      path: '/editer',
+      name: 'editor',
+      component: Editer
     }
   ]
 })
